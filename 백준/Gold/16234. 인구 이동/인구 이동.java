@@ -56,7 +56,7 @@ public class Main{
                         count=0;
 
 
-                        if(dfs(i,j)){ //연합 생김
+                        if(bfs(i,j)){ //연합 생김
                             isMoved=true;
                             sameproporty(); //인구이동
                         }
@@ -75,8 +75,8 @@ public class Main{
 
     }
 
-    //dfs 깊이우선탐색
-    private static boolean dfs(int r,int c){
+    //bfs 너비우선탐색
+    private static boolean bfs(int r,int c){
         queue.offer(new Node(r, c));
         visited[r][c]=true;
 
