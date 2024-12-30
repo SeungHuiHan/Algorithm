@@ -10,18 +10,21 @@ public class Main{
         sc.nextLine();
 
         String S=sc.nextLine();
-        for(int i=0;i<=M-(2*N+1);i++){
-            int count=0;
-            for(int j=0;j<2*N+1;j++){
-                if(j%2==0 && S.charAt(i+j)=='I') count++;
-                else if(j%2==1 && S.charAt(i+j)=='O') count++;
-                else break;
+        int count=0;
+        for(int i=0;i<M-2;i++){
+
+            if(S.charAt(i)=='I' && S.charAt(i+1)=='O' && S.charAt(i+2)=='I'){
+                count++;
+                i++;
+                if(count==N){
+                    answer++;
+                    count--;
+                }
+            }else{
+                count=0;
             }
 
-            if(count==2*N+1) {
-                answer++;
-                i++;
-            }
+
         }
 
         System.out.println(answer);
