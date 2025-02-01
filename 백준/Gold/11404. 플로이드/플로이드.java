@@ -31,9 +31,9 @@ public class Main{
         for(int k=1;k<=n;k++){ //경유
             for(int i=1;i<=n;i++){ // 출발
                 for(int j=1;j<=n;j++){ //도착
-                    if(maps[i][k] != INF && maps[k][j] != INF){
+                    
                         maps[i][j]=Math.min(maps[i][k]+maps[k][j],maps[i][j]);
-                    }
+                    
                 }
             }
         }
