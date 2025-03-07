@@ -2,13 +2,11 @@ import java.util.*;
 
 public class Main{
     private static ArrayDeque<int[]> deque;
-    private static int[][] maps;
     private static boolean[][] visited;
     private static int[] dx={2,2,-2,-2,1,1,-1,-1};
     private static int[] dy={1,-1,1,-1,2,-2,2,-2};
     private static int n;
     private static int targetX,targetY;
-    private static int count;
 
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
@@ -17,14 +15,12 @@ public class Main{
 
         for(int i=0;i<T;i++){
             n=sc.nextInt();
-            maps=new int[n][n];
             visited=new boolean[n][n];
 
             int cx=sc.nextInt();
             int cy=sc.nextInt();
             targetX=sc.nextInt();
             targetY=sc.nextInt();
-            count=0;
 
             deque=new ArrayDeque<>();
             if(cx==targetX && cy==targetY) System.out.println(0);
