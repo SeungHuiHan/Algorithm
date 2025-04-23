@@ -1,14 +1,17 @@
 import java.util.*;
+import java.io.*;
 
 public class Main{
-    public static void main(String[] args){
+    public static void main(String[] args)throws IOException{
         Scanner sc=new Scanner(System.in);
+        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
         
-        int N=sc.nextInt();
+        int N=Integer.parseInt(bf.readLine());
         int[] arr=new int[N];
         
+        StringTokenizer st=new StringTokenizer(bf.readLine());
         for(int i=0;i<N;i++){
-            arr[i]=sc.nextInt();
+            arr[i]=Integer.parseInt(st.nextToken());
         }
         
         
@@ -49,11 +52,12 @@ public class Main{
             cur=prev[cur];
         }
         
+        StringBuilder sb=new StringBuilder();
         Collections.reverse(result);
-        System.out.println(result.size());
+        sb.append(result.size()).append("\n");
         for(int i=0;i<result.size();i++){
-            System.out.print(result.get(i)+" ");
+            sb.append(result.get(i)+" ");
         }
-        
+        System.out.println(sb);
     }
 }
