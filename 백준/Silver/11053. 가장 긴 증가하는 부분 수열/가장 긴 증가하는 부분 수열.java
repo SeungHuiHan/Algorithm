@@ -1,33 +1,34 @@
 import java.util.*;
+import java.io.*;
 
 public class Main{
-    public static void main(String[] args){
-        Scanner sc=new Scanner(System.in);
+    public static void main(String[] args)throws IOException {
+        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
 
-        int N=sc.nextInt();
-        int[] dp=new int[N+1];
-        int[] A=new int[N+1];
-
-        Arrays.fill(dp,1);
-
-        for(int i=1;i<=N;i++){
-            A[i]=sc.nextInt();
+       
+        
+        int N=Integer.parseInt(bf.readLine());
+        int[] arr=new int[N];
+        
+         StringTokenizer st=new StringTokenizer(bf.readLine());
+        for(int i=0;i<N;i++){
+            arr[i]=Integer.parseInt(st.nextToken());
         }
-
-        for(int i=2;i<=N;i++){
-            for(int j=1;j<i;j++){
-                if(A[i]>A[j]){
-                    dp[i]=Math.max(dp[i],dp[j]+1);
-                }
+        
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int target:arr){
+            
+            int pos=Collections.binarySearch(list,target);
+            if(pos<0) pos=-(pos+1);
+            
+            if(pos==list.size()){
+                list.add(target);
+            }else{
+                list.set(pos,target);
             }
         }
-
-        int maxLength=0;
-        for(int i=1;i<=N;i++){
-            maxLength=Math.max(maxLength,dp[i]);
-        }
-
-        System.out.println(maxLength);
+        
+        System.out.println(list.size());
         
     }
 }
