@@ -10,7 +10,7 @@ public class Main{
         }
 
 
-        double max=arr[0];
+        double max=Double.NEGATIVE_INFINITY;
         double current=arr[0];
         for(int i=1;i<N;i++){
             current=Math.max(arr[i],current*arr[i]);
