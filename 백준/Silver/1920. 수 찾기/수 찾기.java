@@ -1,27 +1,58 @@
 import java.util.*;
 
+
 public class Main{
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
 
-        HashSet<Integer> hash=new HashSet<>();
 
         int N=sc.nextInt();
+        int[] A=new int[N];
+
         for(int i=0;i<N;i++){
-            int n=sc.nextInt();
-            hash.add(n);
+            A[i]=sc.nextInt();
         }
-        StringBuilder sb=new StringBuilder();
+        Arrays.sort(A);
 
         int M=sc.nextInt();
+        int[] B=new int[M];
         for(int i=0;i<M;i++){
-            int n=sc.nextInt();
-            if(hash.contains(n)) sb.append(1);
-            else sb.append(0);
-            sb.append("\n");
+            B[i]=sc.nextInt();
         }
 
-        sb.deleteCharAt(sb.length()-1);
+
+
+        StringBuilder sb=new StringBuilder();
+
+        for(int i=0;i<M;i++){
+            int left=0;
+            int right=N-1;
+
+            int target=B[i];
+
+            boolean found = false;
+
+            while (left <= right) {
+                int mid = (left + right) / 2;
+
+                if (A[mid] == target) {
+                    found = true;
+                    break;
+                } else if (A[mid] < target) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+
+            sb.append(found ? 1 : 0).append("\n");
+
+
+
+
+        }
+
+
 
         System.out.println(sb);
     }
