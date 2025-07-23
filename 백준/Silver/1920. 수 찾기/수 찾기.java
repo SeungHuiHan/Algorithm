@@ -7,51 +7,23 @@ public class Main{
 
 
         int N=sc.nextInt();
-        int[] A=new int[N];
+        HashSet<Integer> set=new HashSet();
+        
 
         for(int i=0;i<N;i++){
-            A[i]=sc.nextInt();
+            int a=sc.nextInt();
+            set.add(a);
         }
-        Arrays.sort(A);
-
-        int M=sc.nextInt();
-        int[] B=new int[M];
-        for(int i=0;i<M;i++){
-            B[i]=sc.nextInt();
-        }
-
-
-
+       
         StringBuilder sb=new StringBuilder();
-
+        
+        int M=sc.nextInt();
+       
         for(int i=0;i<M;i++){
-            int left=0;
-            int right=N-1;
-
-            int target=B[i];
-
-            boolean found = false;
-
-            while (left <= right) {
-                int mid = (left + right) / 2;
-
-                if (A[mid] == target) {
-                    found = true;
-                    break;
-                } else if (A[mid] < target) {
-                    left = mid + 1;
-                } else {
-                    right = mid - 1;
-                }
-            }
-
-            sb.append(found ? 1 : 0).append("\n");
-
-
-
-
+            int b=sc.nextInt();
+            if(set.contains(b)) sb.append(1).append("\n");
+            else sb.append(0).append("\n");
         }
-
 
 
         System.out.println(sb);
