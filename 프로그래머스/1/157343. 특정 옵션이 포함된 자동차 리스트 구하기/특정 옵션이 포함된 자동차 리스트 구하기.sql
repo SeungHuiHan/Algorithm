@@ -1,4 +1,4 @@
-SELECT *
-FROM CAR_RENTAL_COMPANY_CAR
-WHERE OPTIONS LIKE '%네비게이션%'
-ORDER BY CAR_ID DESC
+select *
+from CAR_RENTAL_COMPANY_CAR
+where options like '%네비게이션%'
+order by CAR_ID desc
