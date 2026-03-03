@@ -1,5 +1,8 @@
-SELECT A.FLAVOR
-FROM FIRST_HALF AS A JOIN JULY AS B ON A.FLAVOR=B.FLAVOR
-GROUP BY A.FLAVOR
-ORDER BY (SUM(A.TOTAL_ORDER)+SUM(B.TOTAL_ORDER)) DESC
-LIMIT 3
+select c.FLAVOR
+from (select a.FLAVOR, sum(a.TOTAL_ORDER)+sum(b.TOTAL_ORDER) as 'total'
+      from FIRST_HALF a left join JULY b
+      on a.FLAVOR= b.FLAVOR
+      group by a.FLAVOR
+     ) c
+order by total desc
+limit 3;
