@@ -1,21 +1,25 @@
 import java.util.*;
 
 class Solution {
+    
+    private static int nn;
+    private static int[] timess;
     public long solution(int n, int[] times) {
         long answer = 0;
+        nn=n;
+        timess=times;
         
-        int max=0;
-        for(int i=0;i<times.length;i++){
-            max=Math.max(max,times[i]);
+        long max=0;
+        for(int t:times){
+            max=Math.max(max,t);
         }
-        
-        long left=1;
-        long right=max*(long)n;
+        long left=0;
+        long right= max*n;
         
         while(left<=right){
             long mid=(left+right)/2;
             
-            if(canCut(times,mid,n)){
+            if(canCut(mid)){
                 answer=mid;
                 right=mid-1;
             }else{
@@ -26,12 +30,11 @@ class Solution {
         return answer;
     }
     
-    private static boolean canCut(int[] times,long mid,int n){
-        long count=0;
-        
-        for(int time:times){
-            count+=mid/time;
+    private static boolean canCut(long mid){
+        long sum=0;
+        for(int time:timess){
+            sum+=mid/time;
         }
-        return count>=n;
+        return sum>=nn?true:false;
     }
 }
