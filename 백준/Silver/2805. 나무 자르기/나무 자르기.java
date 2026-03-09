@@ -1,49 +1,46 @@
 import java.util.*;
 
 public class Main{
-    static int N,M=0;
-    static int[] trees;
-
+    
+    private static int[] arr;
+    private static long M;
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
-
-        N=sc.nextInt();
-        M=sc.nextInt();
-        trees=new int[N];
-        int maxLength=0;
-
+        
+        int N=sc.nextInt();
+        M=sc.nextLong();
+        
+        arr=new int[N];
         for(int i=0;i<N;i++){
-            trees[i]=sc.nextInt();
-            maxLength=Math.max(maxLength,trees[i]); //제일 긴 나무 길이
+            arr[i]=sc.nextInt();
         }
-
-        long left=0;
-        long right=maxLength;
-        long answer=0;
-
+        
+        int left=0;
+        int right=1000000000;
+        int answer=0;
         while(left<=right){
-            long mid=(left+right)/2;
-
+            int mid=(left+right)/2;
+            
             if(canCut(mid)){
-                answer=mid;
                 left=mid+1;
+                answer=mid;
             }else{
                 right=mid-1;
             }
+            
         }
-
+        
         System.out.println(answer);
-
+        
     }
-
-    static boolean canCut(long height){
-        long sum=0;
-
-        for(int tree:trees){
-            if(tree>=height)
-                sum+=(tree-height);
+    
+    private static boolean canCut(int mid){
+        long answer=0;
+        
+        for(int a:arr){
+            if(a-mid>0)
+                answer+=(a-mid);
         }
-
-        return sum>=M;
+        return answer>=M?true:false;
     }
 }
