@@ -1,31 +1,49 @@
 import java.util.*;
 
-
-public class Main{
+public class Main{ 
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
-
-
         int N=sc.nextInt();
-        HashSet<Integer> set=new HashSet();
-        
-
+        int[] narr=new int[N];
         for(int i=0;i<N;i++){
-            int a=sc.nextInt();
-            set.add(a);
+            narr[i]=sc.nextInt();
         }
-       
-        StringBuilder sb=new StringBuilder();
         
         int M=sc.nextInt();
-       
+        int[] marr=new int[M];
         for(int i=0;i<M;i++){
-            int b=sc.nextInt();
-            if(set.contains(b)) sb.append(1).append("\n");
-            else sb.append(0).append("\n");
+            marr[i]=sc.nextInt();
         }
-
-
-        System.out.println(sb);
+        
+        Arrays.sort(narr);
+        
+        for(int m:marr){
+            int left=0;
+            int right=N-1;
+            boolean flag=false;
+            while(left<=right ){
+                int mid=(left+right)/2;
+               
+                if(mid>N) break;
+                if(narr[mid]==m){
+                    flag=true;
+                    System.out.println(1);
+                    break;
+                }
+                if(narr[mid]>=m){
+                    right=mid-1;
+                }else{
+                    left=mid+1;
+                }
+                
+                
+            }
+            
+            if(!flag)
+                System.out.println(0);
+                 
+                 
+        }
     }
+    
 }
