@@ -24,13 +24,12 @@ public class Main{
             while(left<=right ){
                 int mid=(left+right)/2;
                
-                if(mid>N) break;
+               
                 if(narr[mid]==m){
                     flag=true;
                     System.out.println(1);
                     break;
-                }
-                if(narr[mid]>=m){
+                }else if(narr[mid]>=m){
                     right=mid-1;
                 }else{
                     left=mid+1;
