@@ -1,25 +1,26 @@
 import java.util.*;
 
 public class Main{
-    
-    private static int[] arr;
-    private static long M;
+    private static long[] arr;
+    private static Long M;
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
-        
         int N=sc.nextInt();
         M=sc.nextLong();
         
-        arr=new int[N];
+        long max=0;
+        arr=new long[N];
         for(int i=0;i<N;i++){
-            arr[i]=sc.nextInt();
+            arr[i]=sc.nextLong();
+            max=Math.max(max,arr[i]);
         }
         
-        int left=0;
-        int right=1000000000;
-        int answer=0;
+        long left=0;
+        long right=max;
+        long answer=0;
+        
         while(left<=right){
-            int mid=(left+right)/2;
+            long mid=(left+right)/2;
             
             if(canCut(mid)){
                 left=mid+1;
@@ -27,20 +28,17 @@ public class Main{
             }else{
                 right=mid-1;
             }
-            
         }
         
         System.out.println(answer);
-        
     }
     
-    private static boolean canCut(int mid){
-        long answer=0;
-        
-        for(int a:arr){
-            if(a-mid>0)
-                answer+=(a-mid);
+    private static boolean canCut(long mid){
+        long len=0;
+        for(long a:arr){
+            if(a>mid) len+=(a-mid);
         }
-        return answer>=M?true:false;
+        
+        return len>=M?true:false;
     }
 }
