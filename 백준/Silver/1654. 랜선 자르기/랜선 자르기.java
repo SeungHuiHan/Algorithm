@@ -1,49 +1,44 @@
 import java.util.*;
 
 public class Main{
-    static int K,N;
-    static int[] rans;
+    
+    private static long[] arr;
+    private static int N;
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
-
-        K=sc.nextInt();
+        
+        int K=sc.nextInt();
         N=sc.nextInt();
-
-        rans=new int[K];
-        int maxLength=Integer.MAX_VALUE;
+        
+        arr=new long[K];
         for(int i=0;i<K;i++){
-            rans[i]=sc.nextInt();
-            maxLength=Math.max(maxLength,rans[i]); //최소값 구하기
+            arr[i]=sc.nextLong();
         }
-
-
-        long left=0;
-        long right=maxLength;
+        Arrays.sort(arr);
+        
+        long left=1;
+        long right=arr[K-1];
         long answer=0;
         while(left<=right){
             long mid=(left+right)/2;
-
+            
             if(canCut(mid)){
-                answer=mid;
                 left=mid+1;
+                answer=mid;
             }else{
                 right=mid-1;
             }
         }
-
         System.out.println(answer);
-
-
     }
-
-    static boolean canCut(long can){
+    
+    private static boolean canCut(long mid){
         int count=0;
-
-        for(int ran:rans){
-            count+=ran/can;
+        
+        for(long a:arr){
+            count+=a/mid;
         }
-
-        if(count>=N) return true;
-        else return false;
+        return count>=N?true:false;
     }
+    
 }
