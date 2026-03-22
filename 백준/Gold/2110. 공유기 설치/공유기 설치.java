@@ -3,50 +3,48 @@ import java.util.*;
 public class Main{
     
     private static int N,C;
-    private static int[] arr;
+    private static int[] homes;
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
-        int answer=0;
+        
         N=sc.nextInt();
         C=sc.nextInt();
-        
-        arr=new int[N];
+        homes=new int[N];
         for(int i=0;i<N;i++){
-            arr[i]=sc.nextInt();
+            homes[i]=sc.nextInt();
         }
         
-        Arrays.sort(arr);
+        Arrays.sort(homes);
         
-        int left=0;
-        int right=1000000000;
-        
+        long left=1;
+        long right=homes[N-1];
+        long answer=0;
         while(left<=right){
-            int mid=(left+right)/2; //거리
+            long mid=(left+right)/2;
             
             if(canCut(mid)){
                 left=mid+1;
                 answer=mid;
             }else{
                 right=mid-1;
-            }
+            }                
         }
         
         System.out.println(answer);
-        
-        
     }
     
-    private static boolean canCut(int mid){
-        int count=1; //최대 공유기 개수
-        int prev=arr[0];
-        
-        for(int i=1;i<arr.length;i++){
-            if(arr[i]-prev>=mid){
+    
+    private static boolean canCut(long mid){
+        int count=1;
+        int prev=homes[0];
+        //mid가 최소의 거리라고 생각하면.. mid보다 작은 거리가 나오면 안된다.
+        for(int i=1;i<N;i++){
+            if(homes[i]-prev>=mid) {
                 count++;
-                 prev=arr[i];
-            } 
+                 prev=homes[i]; //설치했을떄만
+            }
         }
         
-        return count>=C?true:false;
+        return count>=C;
     }
 }
