@@ -1,53 +1,54 @@
 import java.util.*;
 
 public class Main{
-   private static ArrayDeque<int []> queue;
-    private static boolean[] visited=new boolean[100001];
-    private static int N;
-    private static int K;
-    private static int minCount=Integer.MAX_VALUE;
-
+    private static int N,K;
+    private static boolean[] visited;
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
-
         N=sc.nextInt();
         K=sc.nextInt();
-        queue=new ArrayDeque<>();
-        bfs(N,0);
-        System.out.println(minCount);
+        
+        visited=new boolean[100001];
+        int answer=bfs(N,0);
+        
+        System.out.println(answer);
+        
     }
-
-    private static void bfs(int start,int startCount){
-        queue.add(new int[]{start,startCount});
-        visited[start]=true;
-
-        while(!queue.isEmpty()){
-            int[] current=queue.poll();
-            int position=current[0];
-            int count=current[1];
-
-            //System.out.println("count: "+count);
-
-            if(position==K){
-                minCount=Math.min(minCount,count);
-                return;
+    
+    private static int bfs(int x,int count){
+        ArrayDeque<int[]> dq=new ArrayDeque<>();
+        dq.add(new int[]{x,0});
+        //visited[x]=true;
+        
+        while(!dq.isEmpty()){
+            int[] current=dq.poll();
+            int c=current[0];
+            int cc=current[1];
+            if(c==K){
+                return cc;
             }
             
-           // if(position<=0) continue;
-
-            int[] nextPositions={position-1,position+1,2*position};
-
-            for(int next:nextPositions){
-                if(next>=0&& next<=100000){
-                    if(!visited[next]){
-                        visited[next]=true;
-                        queue.add(new int[]{next,count+1});
-                    }
-                }
-
+            
+            int n1=c+1;
+            if(n1>=0 && n1<100001 && !visited[n1]){
+                visited[n1]=true;
+                dq.add(new int[]{n1,cc+1});
             }
-
+            
+            int n2=c-1;
+            if(n2>=0 && n2<100001 && !visited[n2]){
+                visited[n2]=true;
+                dq.add(new int[]{n2,cc+1});
+            }
+            
+            int n3=2*c;
+            if(n3>=0 && n3<100001 && !visited[n3]){
+                visited[n3]=true;
+                dq.add(new int[]{n3,cc+1});
+            }
+            
         }
-
+        
+        return 0;
     }
 }
